@@ -1,11 +1,26 @@
+import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import routes from './Routes';
+
+/* SCREENS */
+import Home from './screens/Home';
+import Chat from './screens/Chat';
+
+/* COMPONENTS */
+import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="bg-blue-500 w-screen h-screen m-0 p-0">
-      <header className="border-2 text-center">
-        <h5>ChatRoom App</h5> 
-      </header>
-    </div>
+    <Router>
+      <div className="bg-gray-100 w-screen h-screen m-0 p-0">
+        <Navbar />
+
+        <Switch>
+          <Route exact path={routes.HOME} component={Home} />
+          <Route exact path={routes.CHAT} component={Chat} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
