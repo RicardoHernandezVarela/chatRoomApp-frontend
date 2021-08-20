@@ -10,8 +10,8 @@ function Chat() {
   const { user } = userContext;
 
   return (
-    <div>
-      <h1>{`CHAT ${JSON.stringify(user)}`}</h1>
+    <div className="bg-gray-200 pt-16">
+      <h1>{`CHAT ${user ? user.name : 'User'}`}</h1>
       <NavLink className="ml-2 border-2 rounded" exact to={routes.HOME}>Go to Home</NavLink>
     </div>
   );

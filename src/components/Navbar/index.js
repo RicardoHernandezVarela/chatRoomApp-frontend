@@ -6,7 +6,7 @@ function Navbar() {
   const [menuIconHidden, setMenuIconHidden] = React.useState(true);
 
   return (
-    <div className="bg-green-500 grid grid-cols-3 pt-1 pb-1 shadow-lg z-10">
+    <div className="bg-green-500 grid grid-cols-3 pt-1 shadow-lg z-10 fixed w-screen border-b border-gray-400">
       <div className="col-start-1 cursor-pointer flex justify-center items-center md:hidden"
         onClick={() => setMenuIconHidden(!menuIconHidden)}>
         <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

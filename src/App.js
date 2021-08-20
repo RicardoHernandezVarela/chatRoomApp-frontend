@@ -12,7 +12,7 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <Router>
-      <div className="bg-gray-100 w-screen h-screen m-0 p-0">
+      <div className="bg-gray-200 w-screen h-screen m-0 p-0">
         <Navbar />
 
         <Switch>
