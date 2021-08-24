@@ -17,7 +17,7 @@ function App() {
 
         <Switch>
           <Route exact path={routes.HOME} component={Home} />
-          <Route exact path={routes.CHAT} component={Chat} />
+          <Route exact path={`${routes.CHAT}/:room_id/:room_name`} component={Chat} />
         </Switch>
       </div>
     </Router>

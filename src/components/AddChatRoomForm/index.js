@@ -1,6 +1,17 @@
 import React from 'react';
+import io from 'socket.io-client';
+let socket;
 
 function AddChatRoomForm(props) {
+  const ENDPOINT = 'localhost:5000';
+  React.useEffect(() => {
+    socket = io(ENDPOINT);
+    return () => {
+      socket.emit('disconnect');
+      socket.off();
+    }
+  }, [ENDPOINT]);
+
   const { addNewChatRoom } = props;
   const INITIAL_NAME_VALUE = '';
   const [name, setName] = React.useState(INITIAL_NAME_VALUE);
@@ -12,6 +23,8 @@ function AddChatRoomForm(props) {
       name: name,
       _id: `${name}123`,
     };
+
+    socket.emit('create-room', newRoom);
     addNewChatRoom(newRoom);
     setName(INITIAL_NAME_VALUE);
   };
