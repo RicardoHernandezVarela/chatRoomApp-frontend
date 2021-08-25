@@ -6,7 +6,7 @@ function ChatRoomsList(props) {
   const {chatRooms} = props;
 
   return (
-    <div className="mt-4 mb-2 overflow-scroll">
+    <div className="mt-4 mb-2">
       {chatRooms.length > 0 && (
         chatRooms.map((item, index) => {
           return (

@@ -1,6 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import routes from '../../Routes';
 
 /* Import context Consumer */
 import { UserContext } from '../../context';
@@ -25,25 +23,37 @@ const users = [
   }
 ];
 
-const initialRooms = [
-  {
-    name: 'April',
-    _id: 'a123',
-  },
-  {
-    name: 'Monic',
-    _id: 'm456',
-  }
-];
-
 function Home(props) {
+  const { socket } = props; 
   const userContext = React.useContext(UserContext);
-  const { user } = userContext;
-  const { setUser } = userContext.actions;
-  const [chatRooms, setChatRooms] = React.useState(initialRooms);
+  const { user, chatRooms } = userContext;
+  const { setUser, setChatRooms } = userContext.actions;
 
+  // GET CHATROOMS FROM DB
+  React.useEffect(() => {
+    try {
+      socket.on('all-chatrooms', (allChatRooms) => {
+        setChatRooms([...chatRooms, ...allChatRooms]);
+      });
+    } catch (error) {
+      console.log('SOCKET IS NULL');
+    }
+  }, [socket]);
+
+  // GET NEW CHATROOM AND ADD IT TO THE CHATROOMS LIST
+  React.useEffect(() => {
+    try {
+      socket.on('chatroom-created', (chatRoom) => {
+        setChatRooms([...chatRooms, chatRoom]);
+      });
+    } catch (error) {
+      console.log('NO ROOM FETCHED');
+    }
+  }, [chatRooms]);
+
+  // ADD NEW CHATROOM
   const addNewChatRoom = (newRoom) => {
-    setChatRooms([...chatRooms, newRoom]);
+    socket.emit('create-room', newRoom);
   };
 
   return (
@@ -59,7 +69,6 @@ function Home(props) {
 
       <div className="md:col-start-2">
         <ChatRoomsList chatRooms={chatRooms} />
-        <NavLink className="border-2 rounded block w-1/2 mt-1 ml-auto mr-auto text-center bg-gray-400" exact to={routes.CHAT}>Go to Chat</NavLink>
       </div>
     </div>
   );

@@ -1,18 +1,15 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import io from 'socket.io-client';
 
 /* Import Consumer from Context */
 import { UserContext } from '../../context';
 
-let socket; 
-
 function Chat(props) {
+  const { socket } = props;
   const userContext = React.useContext(UserContext);
   const { user } = userContext;
 
   const { room_id, room_name } = useParams();
-  const ENDPOINT = 'localhost:5000';
 
   const msgInitialValue = '';
   const [message, setMessage] = React.useState(msgInitialValue);
@@ -20,19 +17,18 @@ function Chat(props) {
 
   // ADD USER TO THE CHATROOM
   React.useEffect(() => {
-    console.log('chat loaded');
-    socket = io(ENDPOINT);
+    //console.log('chat loaded');
     socket.emit('join-user-to-chat', {name: user.name, room_id, user_id: user.id});
 
-    return () => {
-      socket.emit('disconnect');
-      socket.off();
-    }
-  }, [ENDPOINT]);
+    // GET ALL CHATROOM MESSAGES
+    socket.on('all-chatroom-messages', (allmessages) => {
+      setMsgsList([...msgsList, ...allmessages]);
+    });
+  }, []);
 
   // RECIVE NEW MESSAGES
   React.useEffect(() => {
-    console.log('new message recived');
+    //console.log('new message recived');
     socket.on('new-message', (newMessage) => {
       setMsgsList([...msgsList, newMessage]);
     });

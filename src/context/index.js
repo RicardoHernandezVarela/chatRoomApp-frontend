@@ -7,6 +7,7 @@ export class Provider extends React.Component {
     super(props);
     this.state = {
       user: null,
+      chatRooms: [],
     };
   }
 
@@ -14,12 +15,17 @@ export class Provider extends React.Component {
     this.setState({user: user});
   };
 
+  setChatRooms = (chatRooms) => {
+    this.setState({chatRooms: chatRooms});
+  };
+
   render() {
     return (
       <UserContext.Provider value={{
         ...this.state,
         actions: {
-          setUser: this.setUser
+          setUser: this.setUser,
+          setChatRooms: this.setChatRooms
         }
       }}>
         {this.props.children}
