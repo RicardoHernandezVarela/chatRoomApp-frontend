@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 /* Import Consumer from Context */
 import { UserContext } from '../../context';
 
+import MessagesList from '../../components/MessagesList';
+import MessageInput from '../../components/MessageInput';
+
 function Chat(props) {
   const { socket } = props;
   const userContext = React.useContext(UserContext);
@@ -47,17 +50,16 @@ function Chat(props) {
   };
 
   return (
-    <div className="bg-gray-200 pt-16">
-      <h1>{`CHAT ROOM: ${room_id} ${room_name}`}</h1>
-      
-      <div>
-        <form onSubmit={(event) => sendMessage(event)}>
-          <input value={message} onChange={(event) => setMessage(event.target.value)} />
-          <button>Send Message</button>
-        </form>
+    <div className="bg-gray-200 pt-16 block md:grid md:grid-cols-4">
+      <div className="block m-auto w-3/4 md:col-start-1">
+        <h5>{`CHAT ROOM: ${user.name} ${room_name}`}</h5>
       </div>
 
-      <pre>{JSON.stringify(msgsList, null, '\t')}</pre>
+      <div className="block m-auto w-3/4 mt-8 md:col-start-2 md:col-span-3 bg-gray-300 rounded border border-gray-800 shadow-md overflow-hidden">
+        <MessagesList msgsList={msgsList} user={user} />
+
+        <MessageInput sendMessage={sendMessage} setMessage={setMessage} message={message} />
+      </div>    
     </div>
   );
 }
