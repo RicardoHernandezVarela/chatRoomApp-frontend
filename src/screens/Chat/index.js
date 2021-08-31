@@ -59,7 +59,7 @@ function Chat(props) {
         <MessagesList msgsList={msgsList} user={user} />
 
         <MessageInput sendMessage={sendMessage} setMessage={setMessage} message={message} />
-      </div>    
+      </div>  
     </div>
   );
 }
