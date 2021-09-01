@@ -20,21 +20,28 @@ function Chat(props) {
 
   // ADD USER TO THE CHATROOM
   React.useEffect(() => {
-    //console.log('chat loaded');
-    socket.emit('join-user-to-chat', {name: user.name, room_id, user_id: user.id});
-
-    // GET ALL CHATROOM MESSAGES
-    socket.on('all-chatroom-messages', (allmessages) => {
-      setMsgsList([...msgsList, ...allmessages]);
-    });
+    try {
+      // JOIN USER TO CHAT
+      socket.emit('join-user-to-chat', {name: user.name, room_id, user_id: user.id});
+  
+      // GET ALL CHATROOM MESSAGES
+      socket.on('all-chatroom-messages', (allmessages) => {
+        setMsgsList([...msgsList, ...allmessages]);
+      });  
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   // RECIVE NEW MESSAGES
   React.useEffect(() => {
-    //console.log('new message recived');
-    socket.on('new-message', (newMessage) => {
-      setMsgsList([...msgsList, newMessage]);
-    });
+    try {
+      socket.on('new-message', (newMessage) => {
+        setMsgsList([...msgsList, newMessage]);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }, [msgsList]);
 
   // SEND MESSAGE

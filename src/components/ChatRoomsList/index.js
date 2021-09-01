@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import routes from '../../Routes';
 
 function ChatRoomsList(props) {
-  const {chatRooms} = props;
+  const { chatRooms, socketConnected } = props;
 
   return (
     <div className="mt-4 mb-2">
@@ -15,8 +15,13 @@ function ChatRoomsList(props) {
         })
       )}
 
+      {/* FALLBACK MESSAGE FOR WHEN THERE ARE NO CHATROOMS OR CAN'T CONNECT TO THE SERVER */}
       {chatRooms.length === 0 && (
-        <p>{'There are no chat rooms'}</p>
+        <div className="border bg-green-300 text-center rounded m-6 mt-12 border-gray-400 shadow">
+          <p className="p-4 text-white">
+            {socketConnected ? 'There are no chat rooms yet, create one 👍' : 'Can´t connect with the server'}
+          </p>
+        </div>
       )}     
     </div>
   );

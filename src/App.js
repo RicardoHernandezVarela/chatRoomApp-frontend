@@ -16,23 +16,32 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      socket: null,
+      socket: {},
     };
 
     this.ENDPOINT = 'localhost:5000';
   }
 
   componentDidMount() {
-    this.setState({
-      socket: io(this.ENDPOINT),
-    });
+    // TRY TO CONNECT TO THE SERVER, attempts: 5
+    const connectionToSocket = io(this.ENDPOINT, {reconnectionAttempts: 5});
+
+    if (connectionToSocket.connected) {
+      this.setState({
+        socket: connectionToSocket,
+      });
+    } else {
+      console.log('Could not connect with the server');
+    }
   }
 
   componentWillUnmount() {
     const {socket} = this.state;
 
-    socket.emit('disconnect');
-    socket.off();
+    if (socket && socket.connected) {
+      socket.emit('disconnect');
+      socket.off();
+    }
   }
 
   render() {

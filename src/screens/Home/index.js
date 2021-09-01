@@ -68,7 +68,7 @@ function Home(props) {
       </div>
 
       <div className="md:col-start-2">
-        <ChatRoomsList chatRooms={chatRooms} />
+        <ChatRoomsList chatRooms={chatRooms} socketConnected={socket.connected} />
       </div>
     </div>
   );
