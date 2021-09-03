@@ -7,6 +7,7 @@ import routes from './Routes';
 /* SCREENS */
 import Home from './screens/Home';
 import Chat from './screens/Chat';
+import Signup from './screens/Signup';
 
 /* COMPONENTS */
 import Navbar from './components/Navbar';
@@ -25,14 +26,9 @@ class App extends React.Component {
   componentDidMount() {
     // TRY TO CONNECT TO THE SERVER, attempts: 5
     const connectionToSocket = io(this.ENDPOINT, {reconnectionAttempts: 5});
-
-    if (connectionToSocket.connected) {
-      this.setState({
-        socket: connectionToSocket,
-      });
-    } else {
-      console.log('Could not connect with the server');
-    }
+    this.setState({
+      socket: connectionToSocket,
+    });
   }
 
   componentWillUnmount() {
@@ -55,6 +51,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path={routes.HOME} component={() => <Home socket={socket} />} />
             <Route exact path={`${routes.CHAT}/:room_id/:room_name`} component={() => <Chat socket={socket} />} />
+            <Route exact path={routes.SIGNUP} component={Signup} />
           </Switch>
         </div>
       </Router>

@@ -14,7 +14,9 @@ function Navbar() {
         </svg>
       </div>
 
-      <h3 className="col-start-2 text-center p-2 font-bold text-white text-2xl">CHAT</h3>
+      <NavLink className="col-start-2 p-2" to={routes.HOME}>
+        <h3 className="text-center font-bold text-white text-2xl">CHAT</h3>
+      </NavLink>
 
       <nav className="col-start-1 md:col-start-3 pt-1 pb-1 relative">
         <ul className="hidden md:flex md:justify-center">
@@ -22,7 +24,7 @@ function Navbar() {
             <NavLink to={routes.HOME}>Login</NavLink>
           </li>
           <li className="text-center p-2 mr-2 text-white">
-            <NavLink to={routes.HOME}>Signup</NavLink>
+            <NavLink to={routes.SIGNUP}>Signup</NavLink>
           </li>
           <li className="text-center p-2 mr-2 text-white">
             <NavLink to={routes.HOME}>Logout</NavLink>
@@ -34,7 +36,7 @@ function Navbar() {
             <NavLink to={routes.HOME}>Login</NavLink>
           </li>
           <li className="text-center p-2 hover:bg-gray-300">
-            <NavLink to={routes.HOME}>Signup</NavLink>
+            <NavLink to={routes.SIGNUP}>Signup</NavLink>
           </li>
           <li className="text-center p-2 hover:bg-gray-300">
             <NavLink to={routes.HOME}>Logout</NavLink>
