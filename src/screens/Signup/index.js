@@ -2,12 +2,19 @@ import React from 'react';
 import { createNewAccount } from '../../API/auth';
 import Routes from '../../Routes';
 
+/* IMPORT USER CONTEXT */
+import { UserContext } from '../../context/';
+
 function Signup(props) {
   const userAccountBase = {
     name: '',
     email: '',
     password: ''
   };
+
+  const userContext = React.useContext(UserContext);
+  const { user } = userContext;
+  const { setUser } = userContext.actions;
 
   const [userAccount, setUserAccount] = React.useState(userAccountBase);
   const [errorsAccount, setErrorsAccount] = React.useState(null);
@@ -26,7 +33,7 @@ function Signup(props) {
     const response = await createNewAccount(userAccount);
 
     if (response.user) {
-      //console.log('RESPONSE: ', response);
+      setUser(response.user);
       setUserAccount(userAccountBase);
       setErrorsAccount(null);
 
