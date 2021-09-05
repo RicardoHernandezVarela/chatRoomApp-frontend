@@ -1,4 +1,6 @@
 import React from 'react';
+import { createNewAccount } from '../../API/auth';
+import Routes from '../../Routes';
 
 function Signup(props) {
   const userAccountBase = {
@@ -16,10 +18,22 @@ function Signup(props) {
   };
 
   // CREATE ACCOUNT / SIGNUP
-  const createAccount = (event) => {
+  const createAccount = async (event) => {
     event.preventDefault();
-    console.log(userAccount);
-    setUserAccount(userAccountBase);
+
+    // API CALL TO CREATE ACCOUNT / SIGNUP
+    const response = await createNewAccount(userAccount);
+
+    if (response.user) {
+      console.log('RESPONSE: ', response);
+      setUserAccount(userAccountBase);
+
+      // REDIRECT TO HOME WHEN USER ACCOUNT IS CREATED
+      props.history.push(Routes.HOME);
+
+    } else {
+      console.log('ERRORS: ', response.errors);
+    }
   };
 
   return (
@@ -49,7 +63,8 @@ function Signup(props) {
           {/* PASSWORD INPUT */}
           <AccountInput
             type={'password'}
-            name={'password'} 
+            name={'password'}
+            autocomplete={'new-password'} 
             placeholder={'password'}
             value={userAccount.password} 
             onChange={(event) => onValueChange(event)} 
@@ -64,11 +79,12 @@ function Signup(props) {
   );
 }
 
-const AccountInput = ({type, name, placeholder, value, onChange}) => {
+const AccountInput = ({type, name, autocomplete, placeholder, value, onChange}) => {
   return (
     <div className="block m-auto mt-10 bg-gray-200 w-2/3 rounded">
       <input type={type} className="bg-transparent w-full text-gray-600 p-1"
-        name={name} 
+        name={name}
+        autoComplete={autocomplete || 'off'}  
         placeholder={placeholder}
         value={value} 
         onChange={onChange} 
