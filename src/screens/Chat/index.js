@@ -22,7 +22,7 @@ function Chat(props) {
   React.useEffect(() => {
     try {
       // JOIN USER TO CHAT
-      socket.emit('join-user-to-chat', {name: user.name, room_id, user_id: user.id});
+      socket.emit('join-user-to-chat', {name: user.name, room_id, user_id: user._id});
   
       // GET ALL CHATROOM MESSAGES
       socket.on('all-chatroom-messages', (allmessages) => {

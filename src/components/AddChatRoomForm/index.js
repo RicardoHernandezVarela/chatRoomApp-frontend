@@ -9,8 +9,7 @@ function AddChatRoomForm(props) {
     event.preventDefault();
 
     const newRoom = {
-      name: name,
-      _id: `${name}123`,
+      name: name
     };
 
     addNewChatRoom(newRoom);
