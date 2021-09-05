@@ -10,6 +10,7 @@ function Signup(props) {
   };
 
   const [userAccount, setUserAccount] = React.useState(userAccountBase);
+  const [errorsAccount, setErrorsAccount] = React.useState(null);
 
   const onValueChange = (event) => {
     const userAccountCopy = userAccount;
@@ -20,19 +21,21 @@ function Signup(props) {
   // CREATE ACCOUNT / SIGNUP
   const createAccount = async (event) => {
     event.preventDefault();
-
+    
     // API CALL TO CREATE ACCOUNT / SIGNUP
     const response = await createNewAccount(userAccount);
 
     if (response.user) {
-      console.log('RESPONSE: ', response);
+      //console.log('RESPONSE: ', response);
       setUserAccount(userAccountBase);
+      setErrorsAccount(null);
 
       // REDIRECT TO HOME WHEN USER ACCOUNT IS CREATED
       props.history.push(Routes.HOME);
 
     } else {
       console.log('ERRORS: ', response.errors);
+      setErrorsAccount(response.errors);
     }
   };
 
@@ -47,7 +50,8 @@ function Signup(props) {
             type={'text'}
             name={'name'} 
             placeholder={'username'}
-            value={userAccount.name} 
+            value={userAccount.name}
+            error={errorsAccount ? errorsAccount.name : errorsAccount} 
             onChange={(event) => onValueChange(event)} 
           />
 
@@ -57,6 +61,7 @@ function Signup(props) {
             name={'email'} 
             placeholder={'email'}
             value={userAccount.email} 
+            error={errorsAccount ? errorsAccount.email : errorsAccount}  
             onChange={(event) => onValueChange(event)} 
           />
 
@@ -66,7 +71,8 @@ function Signup(props) {
             name={'password'}
             autocomplete={'new-password'} 
             placeholder={'password'}
-            value={userAccount.password} 
+            value={userAccount.password}
+            error={errorsAccount ? errorsAccount.password : errorsAccount} 
             onChange={(event) => onValueChange(event)} 
           />
 
@@ -79,16 +85,24 @@ function Signup(props) {
   );
 }
 
-const AccountInput = ({type, name, autocomplete, placeholder, value, onChange}) => {
+const AccountInput = ({type, name, autocomplete, placeholder, value, error, onChange}) => {
   return (
-    <div className="block m-auto mt-10 bg-gray-200 w-2/3 rounded">
-      <input type={type} className="bg-transparent w-full text-gray-600 p-1"
-        name={name}
-        autoComplete={autocomplete || 'off'}  
-        placeholder={placeholder}
-        value={value} 
-        onChange={onChange} 
-      />
+    <div className="mt-10 ">
+      <div className="block m-auto bg-gray-200 w-2/3 rounded">
+        <input type={type} className="bg-transparent w-full text-gray-600 p-1"
+          name={name}
+          autoComplete={autocomplete || 'off'}  
+          placeholder={placeholder}
+          value={value} 
+          onChange={onChange} 
+        />
+      </div>
+
+      {error && (
+        <div className="mt-1 mr-4 mb-1 ml-4">
+          <span className="text-sm text-white">{error}</span>
+        </div>
+      )}
     </div>
   );
 };

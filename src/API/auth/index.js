@@ -7,18 +7,15 @@ const createNewAccount = async (accountData) => {
     body: JSON.stringify(accountData),
     headers: { 'Content-Type': 'application/json' }
   };
-  const result = {user: null, errors: null};
 
   try {
     const response = await fetch(`${ENDPOINT}/signup`, options);
     const data = await response.json();
-    result.user = data;
+    return data;
 
   } catch(error) {
-    result.errors = error;
+    console.log('ERROR POSTING ACCOUNT DATA: ', error);
   }
-
-  return result;
 };
 
 export { createNewAccount };
