@@ -21,7 +21,7 @@ function Navbar() {
       <nav className="col-start-1 md:col-start-3 pt-1 pb-1 relative">
         <ul className="hidden md:flex md:justify-center">
           <li className="text-center p-2 mr-2 text-white">
-            <NavLink to={routes.HOME}>Login</NavLink>
+            <NavLink to={routes.LOGIN}>Login</NavLink>
           </li>
           <li className="text-center p-2 mr-2 text-white">
             <NavLink to={routes.SIGNUP}>Signup</NavLink>
@@ -33,7 +33,7 @@ function Navbar() {
 
         <ul className={`${menuIconHidden ? 'hidden' : 'block'} md:hidden rounded border bg-white text-green-500 absolute -top-2 left-1/4`}>
           <li className="text-center p-2 hover:bg-gray-300">
-            <NavLink to={routes.HOME}>Login</NavLink>
+            <NavLink to={routes.LOGIN}>Login</NavLink>
           </li>
           <li className="text-center p-2 hover:bg-gray-300">
             <NavLink to={routes.SIGNUP}>Signup</NavLink>

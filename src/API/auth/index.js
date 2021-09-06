@@ -18,4 +18,22 @@ const createNewAccount = async (accountData) => {
   }
 };
 
-export { createNewAccount };
+// API CALL TO LOGIN USER
+const loginUser = async (accountData) => {
+  const options = {
+    method: 'POST',
+    body: JSON.stringify(accountData),
+    headers: { 'Content-Type': 'application/json' }
+  };
+
+  try {
+    const response = await fetch(`${ENDPOINT}/login`, options);
+    const data = await response.json();
+    return data;
+
+  } catch(error) {
+    console.log('ERROR POSTING ACCOUNT DATA: ', error);
+  }
+};
+
+export { createNewAccount, loginUser };

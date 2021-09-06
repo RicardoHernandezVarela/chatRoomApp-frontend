@@ -42,7 +42,7 @@ function SignupLoginForm(props) {
         />
 
         <button className="border border-gray-600 p-1 pl-2 pr-2 bg-green-600 shadow-md hover:shadow-lg rounded text-white mt-10 mb-4">
-          Create account
+          {!login ? 'Create account' : 'Login'}
         </button>
       </form>
     </div>

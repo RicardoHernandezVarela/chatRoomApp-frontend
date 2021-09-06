@@ -8,6 +8,7 @@ import routes from './Routes';
 import Home from './screens/Home';
 import Chat from './screens/Chat';
 import Signup from './screens/Signup';
+import Login from './screens/Login';
 
 /* COMPONENTS */
 import Navbar from './components/Navbar';
@@ -52,6 +53,7 @@ class App extends React.Component {
             <Route exact path={routes.HOME} component={() => <Home socket={socket} />} />
             <Route exact path={`${routes.CHAT}/:room_id/:room_name`} component={() => <Chat socket={socket} />} />
             <Route exact path={routes.SIGNUP} component={Signup} />
+            <Route exact path={routes.LOGIN} component={Login} />
           </Switch>
         </div>
       </Router>
