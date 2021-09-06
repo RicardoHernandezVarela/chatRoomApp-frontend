@@ -38,4 +38,21 @@ const loginUser = async (accountData) => {
   }
 };
 
-export { createNewAccount, loginUser };
+// API CALL TO VERIFY USER
+const verifyUser = async () => {
+  const options = {
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' }
+  };
+
+  try {
+    const response = await fetch(`${ENDPOINT}/verify-user`, options);
+    const data = await response.json();
+    return data;
+
+  } catch(error) {
+    console.log('ERROR POSTING ACCOUNT DATA: ', error);
+  }
+};
+
+export { createNewAccount, loginUser, verifyUser };

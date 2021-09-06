@@ -3,6 +3,8 @@ import React from 'react';
 /* Import context Consumer */
 import { UserContext } from '../../context';
 
+import { verifyUser } from '../../API/auth';
+
 /* Import components */
 import ChatRoomsList from '../../components/ChatRoomsList';
 import AddChatRoomForm from '../../components/AddChatRoomForm';
@@ -11,7 +13,24 @@ function Home(props) {
   const { socket } = props; 
   const userContext = React.useContext(UserContext);
   const { user, chatRooms } = userContext;
-  const { setChatRooms } = userContext.actions;
+  const { setUser, setChatRooms } = userContext.actions;
+
+  const tryToVerifyUser = async () => {
+    const response = await verifyUser();
+
+    if (response.user) {
+      // SET USER AFTER VALIDATED
+      setUser(response.user);
+    } else {
+      console.log('ERROR VERIFYING USER', response.error);
+    }
+  }
+
+  // COMPONENTDIDMOUNT
+  React.useEffect(() => {
+    // VERIFY USER
+    tryToVerifyUser();
+  }, []);
 
   // GET CHATROOMS FROM DB
   React.useEffect(() => {
