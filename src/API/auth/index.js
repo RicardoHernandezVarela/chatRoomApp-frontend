@@ -4,6 +4,7 @@ const ENDPOINT = 'http://localhost:5000';
 const createNewAccount = async (accountData) => {
   const options = {
     method: 'POST',
+    credentials: 'include',
     body: JSON.stringify(accountData),
     headers: { 'Content-Type': 'application/json' }
   };
@@ -22,6 +23,7 @@ const createNewAccount = async (accountData) => {
 const loginUser = async (accountData) => {
   const options = {
     method: 'POST',
+    credentials: 'include',
     body: JSON.stringify(accountData),
     headers: { 'Content-Type': 'application/json' }
   };
