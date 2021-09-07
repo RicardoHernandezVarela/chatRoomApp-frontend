@@ -3,6 +3,7 @@ const routes = {
   CHAT: '/chat',
   SIGNUP: '/signup',
   LOGIN: '/login',
+  LOGOUT: '/logout',
 };
 
 export default routes;

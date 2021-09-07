@@ -51,8 +51,24 @@ const verifyUser = async () => {
     return data;
 
   } catch(error) {
-    console.log('ERROR POSTING ACCOUNT DATA: ', error);
+    console.log('ERROR GETTING ACCOUNT DATA: ', error);
   }
 };
 
-export { createNewAccount, loginUser, verifyUser };
+// API CALL TO LOGOUT USER
+const logoutUser = async () => {
+  const options = {
+    credentials: 'include',
+  };
+
+  try {
+    const response = await fetch(`${ENDPOINT}/logout`, options);
+    const data = await response.json();
+    return data;
+
+  } catch(error) {
+    console.log('ERROR GETTING ACCOUNT DATA: ', error);
+  }
+};
+
+export { createNewAccount, loginUser, verifyUser, logoutUser };

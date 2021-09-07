@@ -29,7 +29,9 @@ function Home(props) {
   // COMPONENTDIDMOUNT
   React.useEffect(() => {
     // VERIFY USER
-    tryToVerifyUser();
+    if (user) {
+      tryToVerifyUser();
+    }
   }, []);
 
   // GET CHATROOMS FROM DB

@@ -59,11 +59,15 @@ function Chat(props) {
   return (
     <div className="bg-gray-200 pt-16 block md:grid md:grid-cols-4">
       <div className="block m-auto w-3/4 md:col-start-1">
-        <h5>{`CHAT ROOM: ${user.name} ${room_name}`}</h5>
+        {user && (
+          <h5>{`CHAT ROOM: ${user.name} ${room_name}`}</h5>
+        )}
       </div>
 
       <div className="block m-auto w-3/4 mt-16 md:col-start-2 md:col-span-3 bg-gray-300 rounded border border-gray-800 shadow-md overflow-hidden">
-        <MessagesList msgsList={msgsList} user={user} />
+        {user && (
+          <MessagesList msgsList={msgsList} user={user} />
+        )}
 
         <MessageInput sendMessage={sendMessage} setMessage={setMessage} message={message} />
       </div>  
