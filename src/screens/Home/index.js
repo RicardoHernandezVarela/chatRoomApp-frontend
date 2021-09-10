@@ -6,6 +6,7 @@ import { UserContext } from '../../context';
 import { verifyUser } from '../../API/auth';
 
 /* Import components */
+import Header from '../../components/Header';
 import ChatRoomsList from '../../components/ChatRoomsList';
 import AddChatRoomForm from '../../components/AddChatRoomForm';
 
@@ -62,15 +63,19 @@ function Home(props) {
   };
 
   return (
-    <div className="block md:grid md:grid-cols-2 bg-gray-200 pt-16">
-      <div className="md:col-start-1">
-        <h1 className="text-center mt-3 mb-3 font-bold text-green-600">{`Hello ${user ? user.name : 'User'}`}</h1>
+    <div className="block bg-gray-200 w-4/5 h-screen">
+      <Header />
 
-        <AddChatRoomForm addNewChatRoom={addNewChatRoom} />
-      </div>
+      <div className="block md:grid md:grid-cols-2">
+        <div className="md:col-start-1">
+          <h1 className="text-center mt-3 mb-3 font-bold text-green-600">{`Hello ${user ? user.name : 'User'}`}</h1>
 
-      <div className="md:col-start-2">
-        <ChatRoomsList chatRooms={chatRooms} socketConnected={socket.connected} />
+          <AddChatRoomForm addNewChatRoom={addNewChatRoom} />
+        </div>
+
+        <div className="md:col-start-2">
+          <ChatRoomsList chatRooms={chatRooms} socketConnected={socket.connected} />
+        </div>
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import Login from './screens/Login';
 
 /* COMPONENTS */
 import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 
 class App extends React.Component {
   constructor(props) {
@@ -46,8 +47,8 @@ class App extends React.Component {
 
     return (
       <Router>
-        <div className="bg-gray-200 w-screen h-screen m-0 p-0">
-          <Navbar />
+        <div className="flex bg-gray-200 w-screen h-screen m-0 p-0">
+          <Sidebar />
   
           <Switch>
             <Route exact path={routes.HOME} component={() => <Home socket={socket} />} />

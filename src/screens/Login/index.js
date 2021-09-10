@@ -47,7 +47,7 @@ function Login(props) {
   };
 
   return (
-    <div className="bg-gray-200 pt-16">
+    <div className="block bg-gray-200 w-4/5 h-screen">
       <SignupLoginForm
         onSubmit={login}
         userAccount={userAccount}
