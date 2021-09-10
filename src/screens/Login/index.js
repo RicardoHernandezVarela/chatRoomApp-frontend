@@ -1,7 +1,8 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { loginUser } from '../../API/auth';
 import Routes from '../../Routes';
-import SignupLoginForm from '../../components/SignupLoginForm';
+import { SignupLoginHeader, SignupLoginForm, SignupLoginMessage } from '../../components/SignupLoginForm';
 
 /* IMPORT USER CONTEXT */
 import { UserContext } from '../../context/';
@@ -47,7 +48,9 @@ function Login(props) {
   };
 
   return (
-    <div className="block bg-gray-200 w-4/5 h-screen">
+    <div className="block bg-gray-200 w-screen md:w-4/5 h-screen m-0 p-0">
+      <SignupLoginHeader />
+
       <SignupLoginForm
         onSubmit={login}
         userAccount={userAccount}
@@ -55,6 +58,8 @@ function Login(props) {
         onValueChange={onValueChange}
         login
       />
+
+      <SignupLoginMessage login />
     </div>
   );
 }

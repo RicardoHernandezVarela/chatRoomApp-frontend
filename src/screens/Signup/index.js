@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNewAccount } from '../../API/auth';
 import Routes from '../../Routes';
-import SignupLoginForm from '../../components/SignupLoginForm';
+import { SignupLoginHeader, SignupLoginForm, SignupLoginMessage } from '../../components/SignupLoginForm';
 
 /* IMPORT USER CONTEXT */
 import { UserContext } from '../../context/';
@@ -48,13 +48,17 @@ function Signup(props) {
   };
 
   return (
-    <div className="bg-gray-200 pt-16">
+    <div className="block bg-gray-200 w-screen md:w-4/5 h-screen m-0 p-0">
+      <SignupLoginHeader />
+
       <SignupLoginForm
         onSubmit={createAccount}
         userAccount={userAccount}
         errorsAccount={errorsAccount}
         onValueChange={onValueChange}
       />
+
+      <SignupLoginMessage />
     </div>
   );
 }
