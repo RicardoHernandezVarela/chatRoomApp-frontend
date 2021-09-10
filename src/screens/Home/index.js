@@ -14,16 +14,16 @@ function Home(props) {
   const { socket } = props; 
   const userContext = React.useContext(UserContext);
   const { user, chatRooms } = userContext;
-  const { setUser, setChatRooms } = userContext.actions;
+  const { setUser, setChatRooms, setHideSidebar } = userContext.actions;
 
   const tryToVerifyUser = async () => {
     const response = await verifyUser();
 
-    if (response.user) {
+    if (response && response.user) {
       // SET USER AFTER VALIDATED
       setUser(response.user);
     } else {
-      console.log('ERROR VERIFYING USER', response.error);
+      console.log('ERROR VERIFYING USER', response);
     }
   }
 
@@ -61,10 +61,10 @@ function Home(props) {
   };
 
   return (
-    <div className="block bg-gray-200 w-4/5 h-screen">
+    <div className="block bg-gray-200 w-screen md:w-4/5 h-screen m-0 p-0" onClick={(event) => setHideSidebar(event.target)}>
       <Header />
 
-      <div className="block md:grid md:grid-cols-2">
+      <div className="block md:grid md:grid-cols-2 pt-12">
         <div className="md:col-start-1">
           <h1 className="text-center mt-3 mb-3 font-bold text-green-600">{`Hello ${user ? user.name : 'User'}`}</h1>
 

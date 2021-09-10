@@ -10,10 +10,10 @@ import { UserContext } from '../../context';
 
 function Sidebar({ socket }) {
   const userContext = React.useContext(UserContext);
-  const { user, chatRooms } = userContext;
+  const { user, chatRooms, hideSideBar } = userContext;
 
   return (
-    <div className="w-1/5 h-screen bg-blue-600 border-r border-gray-400 z-10 shadow-xl">
+    <div className={`${hideSideBar ? 'hidden' : ''} md:block fixed md:relative w-1/2 md:w-1/5 h-screen bg-blue-600 border-r border-gray-400 shadow-xl z-20`}>
       <div className="h-12 border-b border-gray-400 flex justify-center items-center">
         <NavLink to={Routes.HOME}>
           <h6 className="text-lg text-white font-bold uppercase">Chatroom</h6>

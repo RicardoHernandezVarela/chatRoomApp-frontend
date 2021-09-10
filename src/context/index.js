@@ -8,6 +8,7 @@ export class Provider extends React.Component {
     this.state = {
       user: null,
       chatRooms: [],
+      hideSideBar: true,
     };
   }
 
@@ -19,13 +20,19 @@ export class Provider extends React.Component {
     this.setState({chatRooms: chatRooms});
   };
 
+  setHideSidebar = (target) => {
+    const hide = target.id !== 'menu-icon';
+    this.setState({hideSideBar: hide});
+  };
+
   render() {
     return (
       <UserContext.Provider value={{
         ...this.state,
         actions: {
           setUser: this.setUser,
-          setChatRooms: this.setChatRooms
+          setChatRooms: this.setChatRooms,
+          setHideSidebar: this.setHideSidebar
         }
       }}>
         {this.props.children}
