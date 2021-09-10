@@ -30,9 +30,7 @@ function Home(props) {
   // COMPONENTDIDMOUNT
   React.useEffect(() => {
     // VERIFY USER
-    if (user) {
-      tryToVerifyUser();
-    }
+    tryToVerifyUser();
   }, []);
 
   // GET CHATROOMS FROM DB
