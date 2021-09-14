@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 /* Import Consumer from Context */
 import { UserContext } from '../../context';
 
+/* IMPORT COMPONENTS */
+import Header from '../../components/Header';
 import MessagesList from '../../components/MessagesList';
 import MessageInput from '../../components/MessageInput';
 
@@ -11,6 +13,7 @@ function Chat(props) {
   const { socket } = props;
   const userContext = React.useContext(UserContext);
   const { user } = userContext;
+  const { setHideSidebar } = userContext.actions;
 
   const { room_id, room_name } = useParams();
 
@@ -57,14 +60,10 @@ function Chat(props) {
   };
 
   return (
-    <div className="bg-gray-200 pt-16 block md:grid md:grid-cols-4">
-      <div className="block m-auto w-3/4 md:col-start-1">
-        {user && (
-          <h5>{`CHAT ROOM: ${user.name} ${room_name}`}</h5>
-        )}
-      </div>
+    <div className="block bg-gray-200 w-screen md:w-4/5 h-screen m-0 p-0" onClick={(event) => setHideSidebar(event.target)}>
+      <Header />
 
-      <div className="block m-auto w-3/4 mt-16 md:col-start-2 md:col-span-3 bg-gray-300 rounded border border-gray-800 shadow-md overflow-hidden">
+      <div className="block m-auto mt-16 md:mt-20 bg-transparent overflow-hidden">
         {user && (
           <MessagesList msgsList={msgsList} user={user} />
         )}

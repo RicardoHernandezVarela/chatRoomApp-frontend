@@ -15,7 +15,7 @@ function MessagesList(props) {
 
   return (
     <div>
-      <ul className="overflow-y-scroll h-96 pb-2">
+      <ul className="overflow-y-scroll h-100 md:h-104 pb-2 mx-4 scrollbar-thin">
         {msgsList.map((item, index) => {
           return (
             <Message key={item._id} item={{...item, index}} ownMsg={user.name === item.name} />

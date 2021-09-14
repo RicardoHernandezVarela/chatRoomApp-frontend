@@ -1,4 +1,5 @@
-const colors = require('tailwindcss/colors')
+const colors = require('tailwindcss/colors');
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   purge: [],
@@ -63,6 +64,10 @@ module.exports = {
       72: '18rem',
       80: '20rem',
       96: '24rem',
+      100: '28rem',
+      104: '32rem',
+      108: '36rem',
+      110: '40rem',
     },
     animation: {
       none: 'none',
@@ -967,5 +972,48 @@ module.exports = {
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
   },
-  plugins: [],
+  plugins: [
+    plugin(function({ addUtilities }) {
+      const newUtilities = {
+        '.scrollbar-hide': {
+          /* Firefox */
+          'scrollbar-width': 'none',
+    
+          /* Safari and Chrome */
+          '&::-webkit-scrollbar': {
+            display: 'none'
+          }
+        },
+        '.scrollbar-thin': {
+          /* width */
+          'scrollbar-width': '10px',
+
+          '&::-webkit-scrollbar': {
+            width: '10px',
+          },
+
+          /* Track */
+          '--scrollbar-track': '#f1f1f1',
+
+          '&::-webkit-scrollbar-track': {
+            background: '#f1f1f1',
+          },
+          
+          /* Handle */
+          '--scrollbar-thumb': '#c1c1c1', 
+
+          '&::-webkit-scrollbar-thumb': {
+            background: '#c1c1c1', 
+          },
+
+          /* Handle on hover */
+          '&::-webkit-scrollbar-thumb:hover': {
+            background: '#b9b9b9', 
+          }
+        },
+      }
+
+      addUtilities(newUtilities)
+    })
+  ],
 }
